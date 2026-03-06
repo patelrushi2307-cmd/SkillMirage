@@ -16,7 +16,7 @@ const Layer1Dashboard = () => {
     const { data: hiringData, isLoading: hiringLoading, refetch: refetchHiring } = useQuery({
         queryKey: ['hiringTrends'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:3001/api/analytics/hiring-trends');
+            const res = await fetch('/api/analytics/hiring-trends');
             return res.json();
         }
     });
@@ -24,7 +24,7 @@ const Layer1Dashboard = () => {
     const { data: skillsData, isLoading: skillsLoading } = useQuery({
         queryKey: ['skillsIntel'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:3001/api/analytics/skills-intel');
+            const res = await fetch('/api/analytics/skills-intel');
             return res.json();
         }
     });
@@ -32,7 +32,7 @@ const Layer1Dashboard = () => {
     const { data: vulnerabilityData, isLoading: vulnerabilityLoading } = useQuery({
         queryKey: ['vulnerabilityIndex'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:3001/api/analytics/vulnerability');
+            const res = await fetch('/api/analytics/vulnerability');
             return res.json();
         }
     });
@@ -40,7 +40,7 @@ const Layer1Dashboard = () => {
     const { data: displacementWarnings, isLoading: warningsLoading, refetch: refetchWarnings } = useQuery({
         queryKey: ['displacementWarnings'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:3001/api/analytics/displacement-warnings');
+            const res = await fetch('/api/analytics/displacement-warnings');
             return res.json();
         }
     });

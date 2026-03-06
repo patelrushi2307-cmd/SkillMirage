@@ -43,7 +43,7 @@ const Index = () => {
     setWorkerCity(data.city);
 
     try {
-      const res = await fetch('http://localhost:3001/api/worker/risk-score', {
+      const res = await fetch('/api/worker/risk-score', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

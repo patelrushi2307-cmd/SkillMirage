@@ -12,7 +12,7 @@ const SkillsIntel = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['skillsIntel'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3001/api/analytics/skills-intel`, {
+      const res = await fetch(`/api/analytics/skills-intel`, {
         headers: { 'Authorization': 'Bearer test-token' }
       });
       return res.json();

@@ -22,7 +22,7 @@ const ReskillingPath = ({ city, jobTitle, category }: ReskillingPathProps) => {
   const { data, isLoading } = useQuery({
     queryKey: ['reskillingPath', city, jobTitle, category],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3001/api/worker/reskilling-path?city=${city}&role=${jobTitle}&category=${category}`, {
+      const res = await fetch(`/api/worker/reskilling-path?city=${city}&role=${jobTitle}&category=${category}`, {
         headers: {
           'Authorization': 'Bearer test-token'
         }

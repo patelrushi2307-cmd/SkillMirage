@@ -37,7 +37,7 @@ const EmployerInsights = () => {
     const { data: insights, isLoading, isError, refetch } = useQuery({
         queryKey: ['employerInsights', city],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:3001/api/analytics/employer-insights?city=${city}`);
+            const res = await fetch(`/api/analytics/employer-insights?city=${city}`);
             return res.json();
         }
     });

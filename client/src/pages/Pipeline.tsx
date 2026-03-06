@@ -6,15 +6,21 @@ export default function Pipeline() {
     const [dataStatus, setDataStatus] = useState("Checking data sources...");
 
     useEffect(() => {
-        // Check python API data status
-        fetch("http://localhost:8000/api/py/data-status")
+        // Check backend health (which in turn checks the Python pipeline)
+        fetch("/api/health")
             .then((res) => res.json())
-            .then((data) => setDataStatus(data.status))
-            .catch(() => setDataStatus("Error connecting to Data Pipeline. Is the Python server running?"));
+            .then((data) => {
+                if (data.ml === "connected") {
+                    setDataStatus(`Pipeline healthy — database: ${data.database}, ML engine: ${data.ml}`);
+                } else {
+                    setDataStatus("ML engine disconnected. Is the Python server running?");
+                }
+            })
+            .catch(() => setDataStatus("Error connecting to Data Pipeline. Is the backend server running?"));
     }, []);
 
     const triggerScrape = () => {
-        fetch("http://localhost:3001/api/analytics/refresh", { method: "POST" })
+        fetch("/api/analytics/refresh", { method: "POST" })
             .then((res) => res.json())
             .then((data) => alert(data.message))
             .catch((err) => alert("Failed to trigger scraper"));
