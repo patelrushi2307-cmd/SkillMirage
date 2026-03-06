@@ -8,39 +8,50 @@ const Header = () => {
   const { user, role, signOut } = useAuth();
 
   return (
-    <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-      <div className="container flex items-center justify-between h-14 px-4">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">SM</span>
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-white/70 backdrop-blur-xl">
+      <div className="container flex items-center justify-between h-16 px-6">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+              <span className="text-white font-bold text-base tracking-tight">SM</span>
             </div>
             <div>
-              <h1 className="text-sm font-bold text-foreground leading-tight">Skills Mirage</h1>
-              <p className="text-[10px] text-muted-foreground leading-tight">
-                {t("Live Workforce Intelligence", "लाइव वर्कफोर्स इंटेलिजेंस")}
+              <h1 className="text-base font-bold text-foreground tracking-tight leading-none">Skills Mirage</h1>
+              <p className="text-[10px] font-medium text-muted-foreground mt-1">
+                {t("Professional Workforce Intelligence", "प्रोफेशनल वर्कफोर्स इंटेलिजेंस")}
               </p>
             </div>
           </div>
-          <span className="hidden sm:inline-block text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-            {t("50L job signals → Your reskilling path", "50L जॉब सिग्नल्स → आपका रीस्किलिंग पाथ")}
-          </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          {role && (
-            <span className="text-[10px] text-muted-foreground bg-primary/10 text-primary px-2 py-0.5 rounded-full capitalize">
-              {role}
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-6 mr-4">
+            <span className="text-xs font-medium text-muted-foreground hover:text-primary cursor-pointer transition-colors">
+              {t("Solutions", "समाधान")}
             </span>
-          )}
-          <span className="text-[10px] text-muted-foreground hidden sm:inline">HACKaMINeD 2026</span>
-          <Button variant="outline" size="sm" onClick={toggleLang} className="h-7 text-xs gap-1">
-            <Globe className="w-3 h-3" />
-            {lang === 'en' ? 'हिंदी' : 'EN'}
+            <span className="text-xs font-medium text-muted-foreground hover:text-primary cursor-pointer transition-colors">
+              {t("Intelligence", "इंटेलिजेंस")}
+            </span>
+          </div>
+
+          <Button variant="ghost" size="sm" onClick={toggleLang} className="h-9 px-3 text-xs font-semibold gap-2 hover:bg-muted/50">
+            <Globe className="w-3.5 h-3.5 text-primary" />
+            {lang === 'en' ? 'EN' : 'HI'}
           </Button>
-          {user && (
-            <Button variant="ghost" size="sm" onClick={signOut} className="h-7 text-xs gap-1 text-muted-foreground">
-              <LogOut className="w-3 h-3" />
+
+          {user ? (
+            <div className="flex items-center gap-2 ml-2 pl-4 border-l border-border">
+              <div className="flex flex-col items-end hidden sm:flex">
+                <span className="text-xs font-bold text-foreground leading-none">{user.email?.split('@')[0]}</span>
+                <span className="text-[9px] font-bold text-primary uppercase tracking-tighter mt-1">{role}</span>
+              </div>
+              <Button variant="ghost" size="icon" onClick={signOut} className="h-9 w-9 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10">
+                <LogOut className="w-4 h-4" />
+              </Button>
+            </div>
+          ) : (
+            <Button size="sm" className="h-9 rounded-lg px-5 font-bold">
+              Sign In
             </Button>
           )}
         </div>
