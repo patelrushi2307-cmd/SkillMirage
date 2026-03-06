@@ -21,7 +21,7 @@ const JobMarket = () => {
     const { data, isLoading, isError, refetch } = useQuery({
         queryKey: ['jobMarket'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:3001/api/jobs`);
+            const res = await fetch(`/api/jobs`);
             if (!res.ok) throw new Error('Failed to fetch jobs');
             return res.json();
         }

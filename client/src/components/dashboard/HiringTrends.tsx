@@ -22,7 +22,7 @@ const HiringTrends = ({ city, onCityChange, timeRange, onTimeChange }: HiringTre
   const { data, isLoading } = useQuery({
     queryKey: ['hiringTrends', city, timeRange],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3001/api/analytics/hiring-trends?city=${city}&timeRange=${timeRange}`, {
+      const res = await fetch(`/api/analytics/hiring-trends?city=${city}&timeRange=${timeRange}`, {
         headers: { 'Authorization': 'Bearer test-token' }
       });
       return res.json();
