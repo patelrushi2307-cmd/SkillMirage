@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 4%; /* #0a0a0a */
+    --foreground: 0 0% 98%; /* Light text */
+
+    --card: 240 10% 6%; /* #0f0f12 */
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 175 77% 26%; /* #0F766E - Deep Teal */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 243 75% 59%; /* #4F46E5 - Muted Indigo */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%; /* #6B7280 */
+
+    --accent: 174 80% 40%; /* #14B8A6 - Hover Teal */
+    --accent-foreground: 224 71.4% 4.1%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --success: 160 84% 39%;
+    --success-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 224 71.4% 4.1%;
+
+    --border: 220 13% 91%; /* #E5E7EB */
+    --input: 220 13% 91%;
+    --ring: 175 77% 26%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-sm;
+  }
+  
+  .premium-shadow {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.1);
+  }
+
+  .risk-critical {
+    @apply bg-destructive/10 text-destructive border-destructive/20;
+  }
+  .risk-high {
+    @apply bg-warning/10 text-warning border-warning/20;
+  }
+  .risk-medium {
+    @apply bg-primary/10 text-primary border-primary/20;
+  }
+  .risk-low {
+    @apply bg-success/10 text-success border-success/20;
+  }
+
+  .glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 8px hsl(var(--destructive) / 0.1); }
+    50% { box-shadow: 0 0 15px hsl(var(--destructive) / 0.2); }
+  }
+
+  .mesh-gradient {
+    background-color: #f6f7f9;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(175, 77%, 26%, 0.05) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(243, 75%, 59%, 0.05) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(175, 77%, 26%, 0.05) 0, transparent 50%);
+  }
+}
