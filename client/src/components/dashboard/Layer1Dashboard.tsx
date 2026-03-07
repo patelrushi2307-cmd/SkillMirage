@@ -61,7 +61,14 @@ const Layer1Dashboard = () => {
                 </div>
                 <div className="flex items-center gap-3">
                     <Button
-                        onClick={() => refetchHiring()}
+                        onClick={async () => {
+                            try {
+                                await fetch('http://localhost:3001/api/analytics/refresh', { method: 'POST', headers: { 'Authorization': 'Bearer test-token' } });
+                            } catch (e) {
+                                console.error('Refresh failed:', e);
+                            }
+                            refetchHiring();
+                        }}
                         variant="outline"
                         className="bg-zinc-900/50 hover:bg-white/5 border-white/10 text-zinc-300 gap-2 h-10 px-4 rounded-xl"
                     >

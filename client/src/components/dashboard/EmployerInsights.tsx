@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useAuth } from '@/hooks/useAuth';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -32,12 +33,17 @@ import { motion } from 'framer-motion';
 
 const EmployerInsights = () => {
     const { t } = useLanguage();
+    const { session } = useAuth();
     const [city, setCity] = useState('Pune');
 
     const { data: insights, isLoading, isError, refetch } = useQuery({
         queryKey: ['employerInsights', city],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:3001/api/analytics/employer-insights?city=${city}`);
+            const res = await fetch(`http://localhost:3001/api/analytics/employer-insights?city=${city}`, {
+                headers: {
+                    'Authorization': 'Bearer test-token'
+                }
+            });
             return res.json();
         }
     });

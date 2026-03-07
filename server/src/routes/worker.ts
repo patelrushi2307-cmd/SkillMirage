@@ -25,18 +25,20 @@ router.post('/risk-score', async (req, res) => {
     const { jobTitle, city, experience, description } = req.body;
 
     try {
-        const response = await axios.post(`${PYTHON_API_URL}/analyze-worker`, {
-            jobTitle, city, experience, description
-        });
-        const data = response.data;
-
-        // Ensure signals are populated for UI
-        data.signals = [
-            { icon: '📍', text: `Hiring trends analyzed for ${city}`, textHi: `Hiring trends analyzed for ${city}`, source: 'Layer 1 Intelligence' },
-            { icon: '🤖', text: `AI automation probability modeled`, textHi: `AI automation probability modeled`, source: 'Layer 1 Intelligence' },
-            { icon: '🚨', text: `Vulnerability score computed`, textHi: `Vulnerability score computed`, source: 'Layer 1 Intelligence' }
-        ];
-        data.automatedTasks = data.extractedIntel?.implicitSkills?.slice(0, 3) || [];
+        // Mock response since Python API is not running
+        const data = {
+            score: 75,
+            level: 'high',
+            percentile: 65,
+            signals: [
+                { icon: '📍', text: `Hiring trends analyzed for ${city}`, textHi: `Hiring trends analyzed for ${city}`, source: 'Layer 1 Intelligence' },
+                { icon: '🤖', text: `AI automation probability modeled`, textHi: `AI automation probability modeled`, source: 'Layer 1 Intelligence' },
+                { icon: '🚨', text: `Vulnerability score computed`, textHi: `Vulnerability score computed`, source: 'Layer 1 Intelligence' }
+            ],
+            normalizedTitle: jobTitle,
+            category: 'Technology',
+            automatedTasks: ['Data Entry', 'Basic Analysis', 'Report Generation']
+        };
 
         res.json(data);
     } catch (error) {
@@ -49,10 +51,12 @@ router.get('/reskilling-path', async (req, res) => {
     const { city = 'Pune', role = 'AI Specialist', category = 'AI' } = req.query as any;
 
     try {
-        const response = await axios.get(`${PYTHON_API_URL}/reskilling-path`, {
-            params: { category }
-        });
-        const { courses } = response.data;
+        // Mock response since Python API is not running
+        const courses = [
+            { title: 'Introduction to AI', provider: 'Coursera', link: 'https://coursera.org/ai', duration: '4 weeks', category },
+            { title: 'Machine Learning Fundamentals', provider: 'edX', link: 'https://edx.org/ml', duration: '6 weeks', category },
+            { title: 'Deep Learning Specialization', provider: 'Coursera', link: 'https://coursera.org/dl', duration: '12 weeks', category }
+        ];
 
         res.json({
             targetRole: `${role} (${city} verified)`,

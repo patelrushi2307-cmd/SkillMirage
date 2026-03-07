@@ -52,7 +52,24 @@ router.get('/displacement-warnings', (req, res) => {
 });
 
 router.get('/employer-insights', (req, res) => {
-    res.json({ topEmployers: ["TechCorp", "DataHub"] });
+    res.json({
+        summary: "TechCorp leads with high demand for skilled developers, while DataHub shows strong training output but market saturation.",
+        insights: [
+            { name: "TechCorp", demand: 85, supply: 60 },
+            { name: "DataHub", demand: 70, supply: 80 },
+            { name: "InnoTech", demand: 90, supply: 40 },
+            { name: "SkillForge", demand: 60, supply: 90 }
+        ],
+        talentGaps: [
+            { skill: "Data Science", shortage: 85 },
+            { skill: "AI/ML Engineering", shortage: 78 },
+            { skill: "Cloud Architecture", shortage: 72 }
+        ],
+        talentSurplus: [
+            { skill: "Basic Coding", surplus: 90 },
+            { skill: "HTML/CSS", surplus: 85 }
+        ]
+    });
 });
 
 router.post('/refresh', async (req, res) => {
